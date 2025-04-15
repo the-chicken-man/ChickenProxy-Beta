@@ -15,4 +15,4 @@ ChickenProxy works with every single blocker schools use, even including blocksi
 - 🚀 **High-Speed Performance**
 - 🪞 **Advanced Tab Cloaking**
 - 🎮 **A lot of games & apps**
-- - 🎮 **A Simple coding inspired user freindly web interface**
+- **A Simple coding inspired user freindly web interface**
