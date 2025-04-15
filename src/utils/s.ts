@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentSetting = '';
     const settingMapping: Record<string, Record<string, string>> = {
       ptype: {
-        uv: 'Ultraviolet (Default)',
+        uv: 'ChickenProxy (uv)',
         sj: 'Scramjet',
       },
       engine: {
