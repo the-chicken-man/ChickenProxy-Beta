@@ -4,8 +4,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        linux: ['outfit', 'sans-serif'],
-        fit: ['Prompt', 'sans-serif'],
+        linux: ['Share Tech Mono', 'Courier New', 'monospace'],
+  fit: ['Orbitron', 'Major Mono Display', 'sans-serif'],
+
       },
       colors: {
         background: {
