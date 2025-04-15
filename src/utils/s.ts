@@ -139,10 +139,10 @@ adconfirm.addEventListener('click', async () => {
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const currentAd = await Settings.get('ads');
+  await Settings.edit('ads', false); // Always off
   const currentConfirm = await Settings.get('PreventClosing');
   const currentAb = await Settings.get('cloak');
-  adStatus.textContent = `Currently: ${currentAd ? 'On' : 'Off'}`;
+  adStatus.textContent = `Currently: Off`;
   conStatus.textContent = `Currently: ${currentConfirm ? 'On' : 'Off'}`;
   abStatus.textContent = `Currently:  ${currentAb ? 'Off' : 'On'}`;
 });
