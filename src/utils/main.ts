@@ -100,7 +100,7 @@ fm.addEventListener('submit', async (event) => {
   event.preventDefault();
   welcome.classList.add('hidden');
   loading.classList.remove('hidden');
-  if (input.value.startsWith('lunar://')) {
+  if (input.value.startsWith('chickenproxy://')) {
     LunarPaths(input.value.trim());
     return;
   }
@@ -176,21 +176,21 @@ si?.addEventListener('input', function () {
 });
 
 function LunarPaths(path: string) {
-  if (path == 'lunar://apps') {
-    input.value = 'lunar://apps';
+  if (path == 'chickenproxy://apps') {
+    input.value = 'chickenproxy://apps';
     frame.src = './ap';
     copy.style.right = '40px';
     clear.style.right = '10px';
     clear.classList.remove('hidden');
-  } else if (path == 'lunar://games') {
+  } else if (path == 'chickenproxy://games') {
     frame.src = './gm';
-    input.value = 'lunar://games';
+    input.value = 'chickenproxy://games';
     copy.style.right = '40px';
     clear.style.right = '10px';
     clear.classList.remove('hidden');
-  } else if (path == 'lunar://settings') {
+  } else if (path == 'chickenproxy://settings') {
     frame.src = './s';
-    input.value = 'lunar://settings';
+    input.value = 'chickenproxy://settings';
     copy.style.right = '40px';
     clear.style.right = '10px';
     clear.classList.remove('hidden');
