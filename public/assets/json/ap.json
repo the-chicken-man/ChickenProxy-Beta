@@ -13,15 +13,9 @@
     "error": false
   },
   {
-    "name": "W3schools",
-    "image": "/assets/images/icons/w3.webp",
-    "link": "https://www.w3schools.com/",
-    "error": false
-  },
-  {
-    "name": "VS Code",
-    "image": "/assets/images/icons/vs.webp",
-    "link": "https://code.visualstudio.com/",
+    "name": "Github Dev",
+    "image": "/assets/images/icons/githubdev.webp",
+    "link": "https://github.dev/",
     "error": false
   },
   {
@@ -31,27 +25,15 @@
     "error": false
   },
   {
-    "name": "Amazon",
-    "image": "/assets/images/icons/ama.webp",
-    "link": "https://www.amazon.com/",
-    "error": false
-  },
-  {
     "name": "Spotify",
     "image": "/assets/images/icons/spot.webp",
     "link": "https://spotify.com",
     "error": false
   },
   {
-    "name": "espn",
-    "image": "/assets/images/icons/espn.webp",
-    "link": "https://www.espn.com",
-    "error": false
-  },
-  {
-    "name": "github",
-    "image": "/assets/images/icons/gh.webp",
-    "link": "https://www.github.com",
+    "name": "Now.gg",
+    "image": "/assets/images/icons/nowgg.webp",
+    "link": "https://now.gg",
     "error": false
   }
 ]
