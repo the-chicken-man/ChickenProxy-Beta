@@ -26,3 +26,5 @@ ChickenProxy works with every single blocker schools use, even including blocksi
         <img src="https://binbashbanana.github.io/deploy-buttons/buttons/remade/koyeb.svg" alt="Deploy to Koyeb" style="float: left; margin-right: 10px;">
     </a>
 </div>
+
+!!Discord server coming soon!!

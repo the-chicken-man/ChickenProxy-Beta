@@ -1,7 +1,7 @@
 {
-  "name": "lunar",
+  "name": "ChickenProxy",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.1",
   "scripts": {
     "dev": "npx astro dev",
     "start": "tsx index.ts",

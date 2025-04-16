@@ -13,7 +13,6 @@ import { server as wisp } from '@mercuryworkshop/wisp-js/server';
 import path from 'node:path';
 import { version } from './package.json';
 import config from './config';
-
 const port: number = config.port;
 const host: string = '0.0.0.0';
 

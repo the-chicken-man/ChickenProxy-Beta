@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         linux: ['Courier New', 'Share Tech Mono', 'monospace'],
-  fit: ['Orbitron', 'Major Mono Display', 'sans-serif'],
+  fit: ['Major Mono Display', 'Orbitron', 'sans-serif'],
 
       },
       colors: {
