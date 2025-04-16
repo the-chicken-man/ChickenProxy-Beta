@@ -28,3 +28,4 @@ ChickenProxy works with every single blocker schools use, even including blocksi
 </div>
 
 !!Discord server coming soon!!
+!!Custom Domain Coming soon!!
