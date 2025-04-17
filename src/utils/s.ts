@@ -127,19 +127,13 @@ Ab.addEventListener('click', async () => {
 });
 
 adconfirm.addEventListener('click', async () => {
-  let currentSetting = await Settings.get('ads');
-  await Settings.edit('ads', !currentSetting);
-  console.log('[DEBUG] toggled to', !currentSetting);
-  adStatus.textContent = `Currently: ${currentSetting ? 'Off' : 'On'}`;
-  if (top) {
-    return;
-  } else {
-    location.reload();
-  }
+  await Settings.edit('ads', false); 
+  console.log('[DEBUG] ads forced to off');
+  adStatus.textContent = `Currently: Off`;
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await Settings.edit('ads', false); // Always off
+  await Settings.edit('ads', false); 
   const currentConfirm = await Settings.get('PreventClosing');
   const currentAb = await Settings.get('cloak');
   adStatus.textContent = `Currently: Off`;
