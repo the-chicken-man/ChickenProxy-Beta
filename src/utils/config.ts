@@ -37,7 +37,7 @@ const Settings = (() => {
     { engine: 'https://duckduckgo.com/?q=' },
     { transport: 'ep' },
     { PreventClosing: false },
-    { ads: true },
+    { ads: false },
     {
       plugins: {
         adblock:
