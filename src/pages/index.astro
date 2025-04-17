@@ -274,6 +274,45 @@ import {
       class="fixed z-10 top-[68px] left-[52px] h-[calc(100vh-60px)] w-[calc(100%-52px)]"
     ></iframe>
     <script src="@src/utils/browse.ts"></script>
+<script>
+  const tabBar = document.getElementById('tabBar');
+  const iframe = document.getElementById('frame');
+
+  let tabs = [];
+  let currentTab = null;
+
+  function createTab(url = 'https://example.com') {
+    const tabId = Date.now();
+    const tab = document.createElement('button');
+    tab.className = "text-[#a5adce] hover:text-white px-3 py-1 rounded bg-[#1e1e2e] text-sm transition";
+    tab.textContent = url.replace(/^https?:\/\//, '').split('/')[0].slice(0, 15) + '...';
+    tab.dataset.id = tabId;
+
+    tab.onclick = () => switchTab(tabId);
+    tabBar.insertBefore(tab, document.getElementById('newTab'));
+
+    tabs.push({ id: tabId, url, element: tab });
+    switchTab(tabId);
+  }
+
+  function switchTab(id) {
+    const tab = tabs.find(t => t.id === id);
+    if (!tab) return;
+
+    currentTab = tab;
+    iframe.src = tab.url;
+
+    tabs.forEach(t => t.element.classList.remove('bg-[#2e2e3e]'));
+    tab.element.classList.add('bg-[#2e2e3e]');
+  }
+
+  document.getElementById('newTab').onclick = () => {
+    createTab('https://duckduckgo.com');
+  };
+
+  // Create initial tab
+  createTab('https://example.com');
+</script>
 
   </body>
 </html>
