@@ -28,17 +28,15 @@ if (engine === 'https://duckduckgo.com/?q=') {
   favicon.src = 'assets/images/engines/google.png';
 }
 
-if (await Settings.get('PreventClosing')) {
-  window.addEventListener('beforeunload', (event) => {
-    event.preventDefault();
-    if (await Settings.get('PreventClosing')) {
-      window.addEventListener('beforeunload', (event) => {
-        event.preventDefault();
-        event.returnValue = ''; // i dont know ts but chatgpt told me this is how to fix it i guess
-      });
-    }
-  });
-}
+(async () => {
+  if (await Settings.get('PreventClosing')) {
+    window.addEventListener('beforeunload', (event) => {
+      event.preventDefault();
+      event.returnValue = ''; // still dont know typescript but chatgpt hopefully does
+    });
+  }
+})();
+
 
 fetch('/assets/json/quotes.json')
   .then((response) => {
