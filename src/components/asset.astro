@@ -11,9 +11,8 @@ import type { Asset } from '@src/utils/as';
     ) : (
       <div class="flex flex-wrap justify-center gap-6">
         {AssetList.map((asset: Asset) => (
-          <button
-            id="data-2"
-            data-json={JSON.stringify(asset)}
+          <a
+            href={asset.file}
             class="relative group cursor-pointer transition-all w-36 transform overflow-visible"
           >
             <div class="relative">
@@ -34,7 +33,7 @@ import type { Asset } from '@src/utils/as';
                 {asset.name}
               </div>
             </div>
-          </button>
+          </a>
         ))}
       </div>
     )
