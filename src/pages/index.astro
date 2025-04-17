@@ -1,317 +1,49 @@
----
-import '@src/main.css';
-import { Image } from 'astro:assets';
-import {
-  ArrowLeft,
-  ArrowRight,
-  Ellipsis,
-  Grid2X2Plus,
-  Joystick,
-  Link2,
-  Maximize,
-  MoonStar,
-  RotateCw,
-  Search,
-  Settings,
-  SquareChevronRight,
-  Star,
-  X,
-} from 'lucide-astro';
----
+const tabBar = document.getElementById('tabBar') as HTMLElement | null;
+const iframe = document.getElementById('frame') as HTMLIFrameElement | null;
 
-<!doctype html>
-<html lang="en" class="h-screen overflow-auto">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Home</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-DQZPCVEF89"></script>
-    <script is:inline>
-      try {
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          window.dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-DQZPCVEF89');
-        console.log("[DEBUG] Google Analytics loaded successfully");
-      } catch (error) {
-        console.error('[DEBUG] Google Analytics failed to load:', error);
-      }
-      </script>     
-    <script src="@src/utils/cloak.ts"></script>
-    <script src="@src/utils/home.ts"></script>
-    <script is:inline src="/assets/packaged/v/cnfg.js" defer></script>
-    <script is:inline src="/assets/packaged/v/b.js" defer></script>
-    <script is:inline src="/assets/packaged/scram/controller.js"></script>
-    <link rel="prefetch" href="/assets/packaged/scram/worker.js" />
-    <link rel="prefetch" href="/assets/packaged/scram/shared.js" />
-    <script src="@src/utils/main.ts"></script>
-    <script src="@src/utils/search.ts"></script>
-  </head>
+type Tab = {
+  id: string;
+  url: string;
+  element: HTMLButtonElement;
+};
 
-  <body class="relative h-screen">
-    <div
-    class="absolute border-r-[3px] border-black border-solid bg-background-overlay left-0 h-screen w-[52px] z-50 flex flex-col items-center"
-  >
-    <a href="./" aria-label="Go Home" id="moonStar" class="mt-4">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    class="text-[#a5adce] hover:text-blue-400 w-8 h-8 transition duration-150 transform hover:scale-110"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    stroke-width="1.5"
-  >
-    <path stroke-linecap="round" stroke-linejoin="round" d="M12 2c.828 0 1.5.672 1.5 1.5v1.086a1.5 1.5 0 0 0 .44 1.06l1.06 1.06A1.5 1.5 0 0 1 15.5 8.5h-2a1.5 1.5 0 0 0-1.5 1.5v3l-1 4H7l-1-4v-1.5a1.5 1.5 0 0 1 .44-1.06l1.06-1.06A1.5 1.5 0 0 0 8.5 7.5V4A1.5 1.5 0 0 1 10 2.5h2z" />
-  </svg>
-</a>
-    <hr class="w-8 border-t-[2px] border-[#a5adce] my-4" />
-    <div
-      class="flex-grow flex flex-col items-center justify-center space-y-4 -mt-8"
-    >
-      <div id="gam">
-        <Joystick
-          class="text-[#a5adce] hover:text-white w-[32px] h-[32px] transition duration-150 transform hover:scale-110"
-        />
-      </div>
-      <div id="ap">
-        <Grid2X2Plus
-          class="text-[#a5adce] hover:text-white w-[28px] h-[28px] transition duration-150 transform hover:scale-110"
-        />
-      </div>
-      <div id="gear">
-        <Settings
-          class="text-[#a5adce] hover:text-white w-[28px] h-[28px] transition duration-150 transform hover:scale-110"
-        />
-      </div>
-    </div>
-  </div>
-  
-    <div
-      class="border-b-[3px] pt-4 border-black border-solid flex justify-between items-center bg-background-overlay p-2 space-x-4 ml-[52px]"
-    >
-      <div class="flex space-x-4">
-        <button
-          aria-label="Go Foward"
-          id="forward"
-          class="relative group w-8 h-8 flex items-center justify-center"
-        >
-          <ArrowLeft
-            class="text-[#a5adce] group-hover:text-white w-[22px] h-[22px] z-10 transition-transform duration-200 ease-in-out"
-          />
-          <div
-            class="absolute inset-0 rounded-full bg-transparent group-hover:bg-white/20 transition-colors duration-200"
-          >
-          </div>
-        </button>
+let tabs: Tab[] = [];
+let currentTab: Tab | null = null;
 
-        <button
-          title="Back"
-          aria-label="Go Back"
-          id="back"
-          class="relative group w-8 h-8 flex items-center justify-center"
-        >
-          <ArrowRight
-            alt="back"
-            class="text-[#a5adce] group-hover:text-white w-[22px] h-[22px] z-10 transition-transform duration-200 ease-in-out"
-          />
-          <div
-            class="absolute inset-0 rounded-full bg-transparent group-hover:bg-white/20 transition-colors duration-200"
-          >
-          </div>
-        </button>
-        <button
-          title="Refresh"
-          id="reload"
-          aria-label="Reload the Tab"
-          class="relative group w-8 h-8 flex items-center justify-center"
-        >
-          <RotateCw
-            alt="refresh"
-            class="text-[#a5adce] group-hover:animate-spin group-hover:text-white w-[22px] h-[22px] z-10 transition-transform duration-200 ease-in-out"
-          />
-          <div
-            class="absolute inset-0 rounded-full bg-transparent group-hover:bg-white/20 transition-colors duration-200"
-          >
-          </div>
-        </button>
-      </div>
-      <form method="post" class="flex-grow mx-4 relative" id="form">
-        <div class="relative flex items-center">
-          <input
-            autocomplete="off"
-            id="input"
-            autofocus="true"
-            type="text"
-            placeholder="Enter URL or search here"
-            class="transition font-fit font-medium pl-14 pr-12 py-2 w-full rounded-full border border-[#a5adce] text-text-SECONDARY focus:outline-none focus:ring-2 bg-[#181824] focus:ring-[#a5adce]"
-          />
-             
-   <Image
-            src="/assets/images/engines/ddg.png"
-            alt="Search Engine"
-            width={25}
-            id="favicon"
-            loading="eager"
-            height={26}
-            class="rounded-full absolute left-3 top-1/2 transform -translate-y-1/2"
-          />
-          <X
-          id="clear"
-          class="absolute right-[5px] text-[#a5adce] w-[22px] h-[22px] cursor-pointer hover:text-red-400 transition-opacity duration-200 hidden"
-        />
-        <button
-          type="button"
-          id="link"
-          class="absolute right-[5px] transition-all duration-200 group w-8 h-8 flex items-center justify-center"
-        >
-          <Link2
-            class="text-[#a5adce] group-hover:text-white w-[22px] h-[22px] z-10 transition-transform duration-200 ease-in-out"
-          />
-        </button>        
-        </div>
-      </form>      
-      <button
-        id="fav"
-        class="relative group w-8 h-8 flex items-center justify-center"
-      >
-        <Star
-          class="text-[#a5adce] group-hover:text-yellow-400 w-[22px] h-[22px] z-10 transition-transform duration-200 ease-in-out"
-        />
-        <div
-          class="absolute inset-0 rounded-full bg-transparent group-hover:bg-white/20 transition-colors duration-200"
-        >
-        </div>
-      </button>
-      <button
-        id="console"
-        class="relative group w-8 h-8 flex items-center justify-center"
-      >
-        <SquareChevronRight
-          class="text-[#a5adce] group-hover:text-white w-[22px] h-[22px] z-10 transition-transform duration-200 ease-in-out"
-        />
-        <div
-          class="absolute inset-0 rounded-full bg-transparent group-hover:bg-white/20 transition-colors duration-200"
-        >
-        </div>
-      </button>
-      <button
-        id="full-screen"
-        class="relative group w-8 h-8 flex items-center justify-center"
-      >
-        <Maximize
-          class="text-[#a5adce] group-hover:text-white w-[22px] h-[22px] z-10 transition-transform duration-200 ease-in-out"
-        />
-        <div
-          class="absolute inset-0 rounded-full bg-transparent group-hover:bg-white/20 transition-colors duration-200"
-        >
-        </div>
-      </button>
-    </div>
-    <div
-    id="starting"
-    class="inset-x-0 mt-[14rem] flex flex-col items-center justify-start p-4 z-30"
-  >
-    <strong class="text-8xl font-linux mb-6 text-text-HEADER font-bold">ChickenProxy DEV</strong>
-    <a href='https://www.free-counters.org/'>Counter</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=becdd1421865860aa46e0d814ab55862c4ec3006'></script>
-    <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1328668/t/13"></script>
-    
-    <form method="post" id="startForm" class="w-full flex justify-center">
-      <div class="mt-12 relative w-full max-w-[25rem] z-40">
-        <div class="relative">
-          <button
-            type="button"
-            id="searchBtn"
-            class="absolute left-4 top-[24%] text-text-SECONDARY w-5 h-5"
-          >
-            <Search class="text-[#a5adce] hover:text-white transition-transform duration-200 ease-in-out" />
-          </button>
-          <input
-            type="text"
-            id="startSearch"
-            autocomplete="off"
-            class="pl-10 pr-12 font-fit font-medium h-12 text-center w-full bg-background-overlay text-text-SECONDARY p-3 rounded-full border border-[#a5adce] cursor-pointer"
-            placeholder="Search or enter an URL..."
-          />
-          <X
-            id="sclear"
-            class="hidden absolute right-4 top-1/2 transform -translate-y-1/2 text-[#a5adce] w-6 h-6 cursor-pointer hover:text-red-400 transition-opacity duration-200"
-          />
-        </div>
-      </div>
-    </form>   
-    <p
-      id="quote"
-      class="font-semibold mt-8 text-base text-text-SECONDARY text-center"
-    >
-      Loading quote...
-    </p>   
-  </div> 
-    <div
-      id="loading"
-      class="hidden mt-80 absolute inset-0 flex-col items-center justify-center p-4"
-    >
-      <div class="flex justify-center items-center space-x-4 mb-6">
-        <Ellipsis class="w-24 h-24 text-text-HEADER animate-bounce delay-150" />
-      </div>
-      <h1 class="text-center text-4xl font-bold mt-10 text-text-HEADER">
-        <strong>ChickenProxy is having a slight delay, please stick around until your site or querie loads</strong>
-      </h1>
-    </div>
-    </div>
-<div id="tabBar" class="flex items-center ml-[52px] px-4 py-2 bg-background-overlay space-x-2 border-b-[2px] border-[#a5adce] overflow-x-auto">
-  <!-- Tabs will be dynamically inserted here -->
-  <button id="newTab" class="text-[#a5adce] hover:text-white text-lg px-2">+</button>
-</div>
-    <iframe
-      id="frame"
-      loading="lazy"
-      title=""
-      class="fixed z-10 top-[68px] left-[52px] h-[calc(100vh-60px)] w-[calc(100%-52px)]"
-    ></iframe>
-    <script src="@src/utils/browse.ts"></script>
-<script>
-  const tabBar = document.getElementById('tabBar');
-  const iframe = document.getElementById('frame');
+function createTab(url = 'https://example.com') {
+  if (!tabBar) return;
 
-  let tabs = [];
-  let currentTab = null;
+  const tabId = Date.now().toString(); // Fix: use string, not number
+  const tab = document.createElement('button');
+  tab.className = "text-[#a5adce] hover:text-white px-3 py-1 rounded bg-[#1e1e2e] text-sm transition";
+  tab.textContent = url.replace(/^https?:\/\//, '').split('/')[0].slice(0, 15) + '...';
+  tab.dataset.id = tabId;
 
-  function createTab(url = 'https://example.com') {
-    const tabId = Date.now();
-    const tab = document.createElement('button');
-    tab.className = "text-[#a5adce] hover:text-white px-3 py-1 rounded bg-[#1e1e2e] text-sm transition";
-    tab.textContent = url.replace(/^https?:\/\//, '').split('/')[0].slice(0, 15) + '...';
-    tab.dataset.id = tabId;
+  tab.onclick = () => switchTab(tabId);
+  const newTabBtn = document.getElementById('newTab');
+  if (newTabBtn) tabBar.insertBefore(tab, newTabBtn);
 
-    tab.onclick = () => switchTab(tabId);
-    tabBar.insertBefore(tab, document.getElementById('newTab'));
+  tabs.push({ id: tabId, url, element: tab });
+  switchTab(tabId);
+}
 
-    tabs.push({ id: tabId, url, element: tab });
-    switchTab(tabId);
-  }
+function switchTab(id: string) {
+  const tab = tabs.find(t => t.id === id);
+  if (!tab || !iframe) return;
 
-  function switchTab(id) {
-    const tab = tabs.find(t => t.id === id);
-    if (!tab) return;
+  currentTab = tab;
+  iframe.src = tab.url;
 
-    currentTab = tab;
-    iframe.src = tab.url;
+  tabs.forEach(t => t.element.classList.remove('bg-[#2e2e3e]'));
+  tab.element.classList.add('bg-[#2e2e3e]');
+}
 
-    tabs.forEach(t => t.element.classList.remove('bg-[#2e2e3e]'));
-    tab.element.classList.add('bg-[#2e2e3e]');
-  }
-
-  document.getElementById('newTab').onclick = () => {
+const newTabBtn = document.getElementById('newTab');
+if (newTabBtn) {
+  newTabBtn.onclick = () => {
     createTab('https://duckduckgo.com');
   };
+}
 
-  // Create initial tab
-  createTab('https://example.com');
-</script>
-
-  </body>
-</html>
+// Create initial tab
+createTab('https://example.com');
