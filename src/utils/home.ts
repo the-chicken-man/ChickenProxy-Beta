@@ -28,15 +28,13 @@ if (engine === 'https://duckduckgo.com/?q=') {
   favicon.src = 'assets/images/engines/google.png';
 }
 
-(async () => {
-  if (await Settings.get('PreventClosing')) {
-    window.addEventListener('beforeunload', (event) => {
-      event.preventDefault();
-      event.returnValue = ''; // still dont know typescript but chatgpt hopefully does
-    });
-  }
-})();
-
+if (await Settings.get('PreventClosing')) {
+  window.addEventListener('beforeunload', (event) => {
+    event.preventDefault();
+    // @ts-ignore
+    return (event.returnValue = '');
+  });
+}
 
 fetch('/assets/json/quotes.json')
   .then((response) => {
