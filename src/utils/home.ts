@@ -31,8 +31,12 @@ if (engine === 'https://duckduckgo.com/?q=') {
 if (await Settings.get('PreventClosing')) {
   window.addEventListener('beforeunload', (event) => {
     event.preventDefault();
-    // @ts-ignore
-    return (event.returnValue = '');
+    if (await Settings.get('PreventClosing')) {
+      window.addEventListener('beforeunload', (event) => {
+        event.preventDefault();
+        event.returnValue = ''; // i dont know ts but chatgpt told me this is how to fix it i guess
+      });
+    }
   });
 }
 
